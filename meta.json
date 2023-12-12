@@ -1,0 +1,13 @@
+{
+  "module_id": "hazalmestci:mcp300x-adc-sensor-go",
+  "visibility": "public",
+  "url": "https://github.com/viam-labs/periph-servo-pca9685",
+  "description": "A Viam module, written in Go, providing analog to digital conversion capabilities for MCP300x SPI ADC's.",
+  "models": [
+    {
+      "api": "rdk:component:sensor",
+      "model": "hazalmestci:sensor:mcp300x-go"
+    }
+  ],
+  "entrypoint": "exec"
+}
