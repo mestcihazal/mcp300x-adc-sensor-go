@@ -5,7 +5,7 @@ import (
 	"context"
 
 	"github.com/edaniels/golog"
-  "github.com/mestcihazal/mcp300x-adc-sensor-go/mcp300x"
+        "github.com/mestcihazal/mcp300x-adc-sensor-go/mcp300x"
 	"go.viam.com/rdk/components/sensor"
 	"go.viam.com/rdk/module"
 	"go.viam.com/utils"
