@@ -4,18 +4,18 @@ package main
 import (
 	"context"
 
-	"github.com/edaniels/golog"
-        "github.com/mestcihazal/mcp300x-adc-sensor-go/mcp300x"
+	"github.com/mestcihazal/mcp300x-adc-sensor-go/mcp300x"
 	"go.viam.com/rdk/components/sensor"
+	"go.viam.com/rdk/logging"
 	"go.viam.com/rdk/module"
 	"go.viam.com/utils"
 )
 
 func main() {
-	utils.ContextualMain(mainWithArgs, golog.NewDevelopmentLogger("mcp300x-adc-sensor-go"))
+	utils.ContextualMain(mainWithArgs, logging.NewLogger("mcp300x-adc-sensor-go"))
 }
 
-func mainWithArgs(ctx context.Context, args []string, logger golog.Logger) error {
+func mainWithArgs(ctx context.Context, args []string, logger logging.Logger) error {
 	sensorModule, err := module.NewModuleFromArgs(ctx, logger)
 	if err != nil {
 		return err
