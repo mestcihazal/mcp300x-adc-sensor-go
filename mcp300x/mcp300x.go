@@ -6,59 +6,42 @@ package mcp300x
 import (
 	"context"
 
-	commonpb "go.viam.com/api/common/v1"
-	pb "go.viam.com/api/component/sensor/v1"
-	"go.viam.com/utils/rpc"
-	"google.golang.org/protobuf/types/known/structpb"
-
+	"go.viam.com/rdk/components/sensor"
 	"go.viam.com/rdk/logging"
-	"go.viam.com/rdk/protoutils"
 	"go.viam.com/rdk/resource"
 )
 
-// client implements SensorServiceClient.
-type client struct {
+var logger = logging.NewDebugLogger("mcp300x")
+
+// registering the component model on init is how we make sure the new model is picked up and usable.
+func init() {
+	resource.RegisterComponent(
+		sensor.API,
+		resource.DefaultModelFamily.WithModel("mcp300x"),
+		resource.Registration[sensor.Sensor, resource.NoNativeConfig]{Constructor: func(
+			ctx context.Context,
+			deps resource.Dependencies,
+			conf resource.Config,
+			logger logging.Logger,
+		) (sensor.Sensor, error) {
+			return newMcp300x(conf.ResourceName()), nil
+		}})
+}
+
+func newMcp300x(name resource.Name) sensor.Sensor {
+	return &mcp300x{
+		Named: name.AsNamed(),
+	}
+}
+
+// mySensor is a sensor device that always returns "hello world".
+type mcp300x struct {
 	resource.Named
-	resource.TriviallyReconfigurable
+	resource.AlwaysRebuild
 	resource.TriviallyCloseable
-	name   string
-	client pb.SensorServiceClient
-	logger logging.Logger
 }
 
-// NewClientFromConn constructs a new Client from connection passed in.
-func NewClientFromConn(
-	ctx context.Context,
-	conn rpc.ClientConn,
-	remoteName string,
-	name resource.Name,
-	logger logging.Logger,
-) (Sensor, error) {
-	c := pb.NewSensorServiceClient(conn)
-	return &client{
-		Named:  name.PrependRemote(remoteName).AsNamed(),
-		name:   name.ShortName(),
-		client: c,
-		logger: logger,
-	}, nil
-}
-
-func (c *client) Readings(ctx context.Context, extra map[string]interface{}) (map[string]interface{}, error) {
-	ext, err := structpb.NewStruct(extra)
-	if err != nil {
-		return nil, err
-	}
-	resp, err := c.client.GetReadings(ctx, &commonpb.GetReadingsRequest{
-		Name:  c.name,
-		Extra: ext,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	return protoutils.ReadingProtoToGo(resp.Readings)
-}
-
-func (c *client) DoCommand(ctx context.Context, cmd map[string]interface{}) (map[string]interface{}, error) {
-	return protoutils.DoFromResourceClient(ctx, c.client, c.name, cmd)
+// Readings always returns "hello world".
+func (s *mcp300x) Readings(ctx context.Context, _ map[string]interface{}) (map[string]interface{}, error) {
+	return map[string]interface{}{"hello": "world"}, nil
 }
