@@ -32,7 +32,7 @@ func newSensor(
 	if err != nil {
 		return nil, err
 	}
-	mcp := mcp300{
+	mcp := mcp300x{
 		Named:  conf.ResourceName().AsNamed(),
 		logger: logger,
 		// Attributes necessary for this sensor component config
