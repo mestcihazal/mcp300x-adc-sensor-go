@@ -1,12 +1,12 @@
 {
-  "module_id": "hazalmestci:mcp300x-adc-sensor-go",
+  "module_id": "hazalmestci:mcp3004-8",
   "visibility": "public",
-  "url": "https://github.com/mestcihazal/mcp300x-adc-sensor-go",
-  "description": "A Viam module, written in Go, providing analog to digital conversion capabilities for MCP300x SPI ADC's.",
+  "url": "https://github.com/mestcihazal/mcp3004-8",
+  "description": "A Viam module, written in Go, providing analog to digital conversion capabilities for MCP3004 and MCP3008 SPI ADC's.",
   "models": [
     {
       "api": "rdk:component:sensor",
-      "model": "hazalmestci:sensor:mcp300x-go"
+      "model": "hazalmestci:sensor:mcp3004-8-go"
     }
   ],
   "entrypoint": "exec"
