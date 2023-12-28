@@ -1,4 +1,4 @@
-module github.com/mestcihazal/mcp300x-adc-sensor-go/mcp300x
+module github.com/mestcihazal/mcp3004-8-go
 
 go 1.19
 
@@ -135,4 +135,6 @@ require (
 	gopkg.in/square/go-jose.v2 v2.6.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	nhooyr.io/websocket v1.8.7 // indirect
+	periph.io/x/conn/v3 v3.7.0 // indirect
+	periph.io/x/host/v3 v3.8.1-0.20230331112814-9f0d9f7d76db // indirect
 )
