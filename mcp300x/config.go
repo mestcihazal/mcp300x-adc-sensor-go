@@ -15,7 +15,7 @@ func (config *Mcp300xConfig) Validate(path string) ([]string, error) {
 		return nil, errors.New("you need to specify the SPI bus")
 	}
 	if config.ChipSelect == "" {
-		return nil, errors.New("you need to specify the chip select pin")
+		return nil, errors.New("you need to specify the chip select")
 	}
 	return []string{}, nil
 }
