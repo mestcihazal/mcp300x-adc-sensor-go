@@ -1,7 +1,7 @@
 # mcp3004-8-go
 The module provides analog-to-digital conversion capabilities for MCP3004 and MCP3008 SPI ADCs. Written in Go, board agnostic. Tested on Raspberry Pi and Jetson Orin. 
 
-The values you get from the readings will be the voltage and you will need to interpret it depending on which sensor you hook up to the MCP300x. 
+The values you get from the readings will be proportional to the voltage and you will need to interpret it depending on which sensor you hook up to the MCP300x. 
 
 To use this module in your smart machine configuration, deploy the module to your machine or add it as a local module with the proper executable path. 
 
