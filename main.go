@@ -4,7 +4,7 @@ package main
 import (
 	"context"
 
-	"github.com/mestcihazal/mcp300x-adc-sensor-go/mcp300x"
+	"github.com/mestcihazal/mcp3004-8-go/mcp300x"
 	"go.viam.com/rdk/components/sensor"
 	"go.viam.com/rdk/logging"
 	"go.viam.com/rdk/module"
@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-	utils.ContextualMain(mainWithArgs, logging.NewLogger("mcp300x-adc-sensor-go"))
+	utils.ContextualMain(mainWithArgs, module.NewLoggerFromArgs("mcp3004-8-go"))
 }
 
 func mainWithArgs(ctx context.Context, args []string, logger logging.Logger) error {
