@@ -24,10 +24,10 @@ func mainWithArgs(ctx context.Context, args []string, logger logging.Logger) err
 	sensorModule.AddModelFromRegistry(ctx, sensor.API, mcp300x.Model)
 
 	err = sensorModule.Start(ctx)
-	defer sensorModule.Close(ctx)
 	if err != nil {
 		return err
 	}
+	defer sensorModule.Close(ctx)
 
 	<-ctx.Done()
 	return nil
