@@ -41,7 +41,7 @@ Save your config.
 
 ### Attributes
 
-The following attributes are available for a `viam-mcp3004-8-go` sebsor:
+The following attributes are available for a `mcp3004-8` sensor:
 
 | Name    | Type   | Inclusion    | Description |
 | ------- | ------ | ------------ | ----------- |
