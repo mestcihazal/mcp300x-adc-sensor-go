@@ -1,14 +1,31 @@
-# mcp3004-8-go
-The module provides analog-to-digital conversion capabilities for MCP3004 and MCP3008 SPI ADCs. Written in Go, board agnostic. Tested on Raspberry Pi and Jetson Orin. 
+# `mcp3004-8-go` modular resource
 
-The values you get from the readings will be proportional to the voltage and you will need to interpret it depending on which sensor you hook up to the MCP300x. 
+This module provides analog-to-digital conversion capabilities for MCP3004 and MCP3008 SPI ADCs. Written in Go, board agnostic. Tested on Raspberry Pi and Jetson Orin.
 
-To use this module in your smart machine configuration, deploy the module to your machine or add it as a local module with the proper executable path. 
+The values you get from the readings will be proportional to the voltage and you will need to interpret it depending on which sensor you hook up to the MCP300x.
 
-Then add the sensor (either from the registry or as a local component) by clicking on the "Create component" button. 
+You can add as many analog sensors as your MCP300x allows and get readings from them concurrently (this depends on how many channels it has, so for MCP3004 that is four channels, and for MCP3008 that is eight).
 
-Example configuration for the Attributes section of your sensor looks like this:
+## Build and run
 
+To use this module, follow the instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `hazalmestci:sensor:mcp3004-8-go` model from the [`viam-mcp3004-8-go` module](https://app.viam.com/module/hazalmestci/mcp3004-8).
+
+## Configure your `mcp3004-8-go`
+
+> [!NOTE]
+> Before configuring your `mcp3004-8-go`, you must [create a machine](https://docs.viam.com/manage/fleet/machines/#add-a-new-machine).
+
+Navigate to the **Config** tab of your machine's page in [the Viam app](https://app.viam.com/).
+Click on the **Components** subtab and click **Create component**.
+Select the `sensor` type, then select the `hazalmestci:sensor:mcp3004-8-go` model.
+Click **Add module**, then enter a name for your sensor and click **Create**.
+
+On the new component panel, copy and paste the following attribute template into your sensor’s **Attributes** box:
+
+> [!NOTE]
+> For more information, see [Configure a Machine](https://docs.viam.com/manage/configuration/).
+
+```json
 {
   "chip_select": "0",
   "spi_bus": "0", 
@@ -18,7 +35,61 @@ Example configuration for the Attributes section of your sensor looks like this:
     "humidity": 2
   }
 }
+```
 
-You will need to tell the sensor which chip_select pin you are using as well as the spi_bus. 
+Save your config.
 
-You can add as many analog sensors as your MCP300x allows and get readings from them concurrently (this depends on how many channels it has, so for MCP3004 that is four channels, and for MCP3008 that is eight). 
+### Attributes
+
+The following attributes are available for a `viam-mcp3004-8-go` sebsor:
+
+| Name    | Type   | Inclusion    | Description |
+| ------- | ------ | ------------ | ----------- |
+| `chip_select` | string | **Required** | The `chip_select`` pin you are using. |
+| `spi_bus` | string | **Required** | the `spi_bus` you are using. |
+| `pins` | string | **Required** | The pins you are using for moisture, temperature, and humidity. |
+
+### Example configuration
+
+```json
+{
+    "name": "my-mcp3004",
+    "model": "hazalmestci:sensor:mcp3004-8-go",
+    "type": "sensor",
+    "namespace": "rdk",
+    "attributes": {
+      "chip_select": "0",
+      "spi_bus": "0", 
+      "pins": {
+        "moisture": 0,
+        "temperature": 1,
+        "humidity": 2
+      }
+    },
+    "depends_on": []
+}
+```
+
+## Local Development
+
+To use the `viam-mcp3004-8-go` module with a local install, clone this repository to your machine’s computer, navigate to the `module` directory, and run:
+
+```go
+go build
+```
+
+On your robot’s page in the [Viam app](https://app.viam.com/), enter
+the [module’s executable path](/registry/create/#prepare-the-module-for-execution), then click **Add module**.
+The name must use only lowercase characters.
+Then, click **Save config**.
+
+## Next Steps
+
+1. To test your sensor, go to the [**Control** tab](https://docs.viam.com/manage/fleet/robots/#control) and test that you are getting readings.
+2. Once you can obtain your readings, configure the data manager to [capture](https://docs.viam.com/data/capture/) and [sync](https://docs.viam.com/data/cloud-sync/) the data from all of your machines.
+3. To retrieve data captured with the data manager, you can [query data with SQL or MQL](https://docs.viam.com/data/query/) or [visualize it with tools like Grafana](https://docs.viam.com/data/visualize/).
+
+## License
+
+Copyright 2021-2023 Viam Inc. <br>
+Apache 2.0
