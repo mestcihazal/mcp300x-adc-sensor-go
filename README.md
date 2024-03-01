@@ -1,4 +1,4 @@
-# `mcp3004-8-go` modular resource
+# `mcp3004-8` modular resource
 
 This module provides analog-to-digital conversion capabilities for MCP3004 and MCP3008 SPI ADCs. Written in Go, board agnostic. Tested on Raspberry Pi and Jetson Orin.
 
