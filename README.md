@@ -8,12 +8,12 @@ You can add as many analog sensors as your MCP300x allows and get readings from 
 
 ## Build and run
 
-To use this module, follow the instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `hazalmestci:sensor:mcp3004-8-go` model from the [`viam-mcp3004-8-go` module](https://app.viam.com/module/hazalmestci/mcp3004-8).
+To use this module, follow the instructions to [add a module from the Viam Registry](https://docs.viam.com/registry/configure/#add-a-modular-resource-from-the-viam-registry) and select the `hazalmestci:sensor:mcp3004-8-go` model from the [`mcp3004-8` module](https://app.viam.com/module/hazalmestci/mcp3004-8).
 
-## Configure your `mcp3004-8-go`
+## Configure your `mcp3004-8`
 
 > [!NOTE]
-> Before configuring your `mcp3004-8-go`, you must [create a machine](https://docs.viam.com/manage/fleet/machines/#add-a-new-machine).
+> Before configuring your `mcp3004-8`, you must [create a machine](https://docs.viam.com/manage/fleet/machines/#add-a-new-machine).
 
 Navigate to the **Config** tab of your machine's page in [the Viam app](https://app.viam.com/).
 Click on the **Components** subtab and click **Create component**.
@@ -72,7 +72,7 @@ The following attributes are available for a `viam-mcp3004-8-go` sebsor:
 
 ## Local Development
 
-To use the `viam-mcp3004-8-go` module with a local install, clone this repository to your machine’s computer, navigate to the `module` directory, and run:
+To use the `mcp3004-8` module with a local install, clone this repository to your machine’s computer, navigate to the `module` directory, and run:
 
 ```go
 go build
